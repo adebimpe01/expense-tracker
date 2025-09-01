@@ -195,7 +195,7 @@ label{
     color: #4a5568;
     font-weight: 500;
 }
-input{
+input,select{
     width: 100%;
     padding: 12px 16px;
     border: 2px solid #e2e8f0;
@@ -204,12 +204,12 @@ input{
     transition: all 0.2s ease;
     background-color: white;
 }
-input:focus {
+input,select:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
-input:hover{
+input,select:hover{
     border-color: #cbd5e0;
 }
 small{
@@ -230,7 +230,15 @@ button[type="submit"]{
     font-weight: 500;
     transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-    margin-top: auto;
+    margin-top: 25px;
+}
+#cashflow option[value="income"] {
+    color: #059669;
+    font-weight: bold;
+}
+#cashflow option[value="expenses"] {
+    color: #dc2626;
+    font-weight: bold;
 }
 button[type="submit"]:hover{
     transform: translateY(-2px);

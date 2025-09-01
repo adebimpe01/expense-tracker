@@ -5,6 +5,7 @@ const transactionListEl = document.getElementById("transaction-list");
 const transactionFormEl = document.getElementById("transaction-form")
 const descriptionEl = document.getElementById("description");
 const amountEl = document.getElementById("amount");
+const cashflowEl = document.getElementById("cashflow");
 
 let transactions = JSON.parse(localStorage.getItem("transactions"))  || 
 [];
@@ -17,13 +18,24 @@ function addTransaction(e){
     //get form values
     const description = descriptionEl.value.trim();
     const amount = parseFloat(amountEl.value);
+    const cashflow = cashflowEl.value;
+
+    let finalAmount = amount
+    if (cashflow === "expenses") {
+        finalAmount = -Math.abs(amount);
+    }
+    else {
+        finalAmount = Math.abs(amount);
+    }
 
 
     transactions.push({
         id:Date.now(),
         description,
-        amount
-    })
+        amount:finalAmount,
+        cashflow
+
+    });
     localStorage.setItem("transactions",JSON.stringify(transactions));
     
     updateTransactionList();
@@ -48,7 +60,6 @@ function createTransactionElement(transaction) {
     const li = document.createElement('li');
     li.classList.add("transaction");
     li.classList.add(transaction.amount > 0 ? "income" : "expenses");
-    // todo:update the amount formatting
     li.innerHTML = `
     <span>${transaction.description}</span>
     <span>
@@ -74,10 +85,12 @@ function updateSummary() {
         .filter(transaction => transaction.amount < 0)
         .reduce((acc,transaction) => acc + transaction.amount, 0);
 
+        
+
     // update ui => todo: fix the formatting
     balanceEl.textContent = formatCurrency(balance);
     incomeAmountEl.textContent = formatCurrency(income);
-    expenseAmountEl.textContent =formatCurrency(expenses);
+    expenseAmountEl.textContent = formatCurrency(Math.abs(expenses));
 
 }
 

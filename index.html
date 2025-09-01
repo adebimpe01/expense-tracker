@@ -44,8 +44,15 @@
                     </div>
                     <div class="form-group">
                         <label for="amount">Amount</label>
-                        <input type="number" id="amount" placeholder="Enter Amount..." required>
+                        <input inputmode="numeric" type="number" id="amount" placeholder="Enter Amount..." required>
                         <small>use negative (-) for expenses</small>
+                    </div>
+                    <div class="cashflow-group">
+                        <label for="cashflow">Cashflow</label>
+                        <select id="cashflow">
+                            <option  value="income">Income</option>
+                            <option  value="expenses">Expenses</option>
+                        </select>
                     </div>
                     <button type="submit">Add Transaction</button>
                 </form>
